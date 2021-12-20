@@ -10,40 +10,6 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="409dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="16dp"
-            android:minHeight="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <CalendarView
-            android:id="@+id/simpleDatePicker"
-            android:layout_width="407dp"
-            android:layout_height="326dp"
-            android:layout_marginTop="32dp"
-            android:datePickerMode="spinner"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.333"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner" />
-
-        <CalendarView
-            android:id="@+id/simpleDatePicker2"
-            android:layout_width="408dp"
-            android:layout_height="326dp"
-            android:layout_marginTop="388dp"
-            android:datePickerMode="spinner"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner" />
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -63,38 +29,49 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="3dp"
-            android:layout_marginTop="14dp"
+            android:layout_marginTop="71dp"
             android:layout_marginEnd="345dp"
             android:text="Start Date"
             android:textColor="#A80303"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spinner" />
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="14dp"
             android:layout_marginEnd="355dp"
             android:text="End Date"
             android:textColor="#A80303"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/simpleDatePicker" />
+            app:layout_constraintTop_toBottomOf="@+id/calendarView2" />
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="157dp"
-            android:layout_marginTop="17dp"
+            android:layout_marginTop="199dp"
             android:layout_marginEnd="157dp"
             android:onClick="onClick"
             android:text="Predict"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/simpleDatePicker2" />
+            app:layout_constraintTop_toBottomOf="@+id/calendarView2" />
+
+        <CalendarView
+            android:id="@+id/calendarView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="31dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
