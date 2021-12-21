@@ -18,22 +18,13 @@ public class MainActivity2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        CalendarView calendarView = findViewById(R.id.calendarView2);
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        Bundle extras = getIntent().getExtras();
+        if (extras != null){
+            String value = extras.getString("key");
 
-        String selectedDate = dateFormatter.format(new Date(calendarView.getDate()));
+            TextView txSowingDate = findViewById(R.id.textView4);
+            txSowingDate.setText(value);
+        }
 
-        TextView tx = findViewById(R.id.textView);
-        tx.setText("Button clicked: " + selectedDate);
-    }
-
-    public void onClick(View view) {
-        CalendarView calendarView = findViewById(R.id.calendarView2);
-        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
-
-        String selectedDate = dateFormatter.format(new Date(calendarView.getDate()));
-
-        TextView tx = findViewById(R.id.textView);
-        tx.setText("Button clicked: " + selectedDate);
     }
 }

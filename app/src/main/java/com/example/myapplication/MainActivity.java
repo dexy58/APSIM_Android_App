@@ -14,6 +14,13 @@ import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -21,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
 
     Calendar calendarStart = Calendar.getInstance();
     Calendar calendarEnd = Calendar.getInstance();
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,19 +98,63 @@ public class MainActivity extends AppCompatActivity {
             alertBuilder.show();
         }
         else{
+            /*TextView tx = findViewById(R.id.textView);
+            Spinner sp = findViewById(R.id.spinner);
+            tx.setText("Button clicked: " + sp.getSelectedItem().toString());
+            tx.setText("Button clicked: " + dateFormatter.format(calendarStart.getTime()));*/
 
-            TextView tx = findViewById(R.id.textView);
+            Thread thread = new Thread(new Runnable() {
 
-            //Spinner sp = findViewById(R.id.spinner);
-            //tx.setText("Button clicked: " + sp.getSelectedItem().toString());
+                @Override
+                public void run() {
+                    try  {
+                        String outputJSON = new String();
+                        try {
 
-            tx.setText("Button clicked: " + dateFormatter.format(calendarStart.getTime()));
-            //openPredictionScreen();
+                            URL url = new URL("http://10.19.0.105:8080/getPrediction");
+                            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                            conn.setDoOutput(true);
+                            conn.setRequestMethod("POST");
+                            conn.setRequestProperty("Content-Type", "application/json");
+
+                            String input = "{\n" +
+                                    "    \"name\": \"corn\",\n" +
+                                    "    \"startDate\" : \"25-mar\",\n" +
+                                    "    \"endDate\" : \"8-apr\"\n" +
+                                    "}";
+
+                            try (OutputStream os = conn.getOutputStream()) {
+                                os.write(input.getBytes());
+                                os.flush();
+                            }
+
+                            String output;
+                            BufferedReader br = new BufferedReader(new InputStreamReader(
+                                    (conn.getInputStream())));
+                            System.out.println("Output from Server .... \n");
+                            while ((output = br.readLine()) != null) {
+                                outputJSON += output;
+                            }
+                            conn.disconnect();
+                        } catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        openPredictionScreen(outputJSON);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
+
+            thread.start();
         }
     }
 
-    public void openPredictionScreen(){
+    public void openPredictionScreen(String output){
         Intent intent = new Intent(this, MainActivity2.class);
+        intent.putExtra("key", output);
         startActivity(intent);
     }
 }
